@@ -1,0 +1,47 @@
+FROM node:14-alpine as builder
+
+# create work directory
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+
+# copy package files
+COPY package*.json ./
+COPY yarn.lock ./
+
+# ensure that the package installer should never drop into user and group switching when installing our apps
+RUN npm config set unsafe-perm true
+
+# install dependencies
+RUN npm install -g typescript
+RUN npm install -g ts-node
+USER node
+RUN yarn install
+
+# copy project and initiate build
+COPY --chown=node:node . .
+RUN yarn build
+
+# multi-stage build
+# get the build from builder
+FROM node:14-alpine
+
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+
+# copy package files
+COPY package*.json ./
+COPY yarn.lock ./
+
+# set the user node
+USER node
+
+# install requirements and copy the build
+RUN yarn install
+COPY --from=builder /home/node/app/dist ./dist
+
+# copy env variables
+COPY --chown=node:node .env.dev .
+COPY --chown=node:node ./public .
+
+EXPOSE 2700
+CMD [ "node", "dist/server.js" ]
