@@ -1,7 +1,7 @@
 {
-  "name": "bharatx-notification-service",
+  "name": "typescript-node-microservice-starter",
   "version": "1.0.0",
-  "description": "Notification Service for BharatX",
+  "description": "typescript-node-microservice-starter",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bharatx-in/BharatX-Notification-Service.git"
+    "url": "git+https://github.com/imskr/typescript-node-microservice-starter.git"
   },
   "author": "",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bharatx-in/BharatX-Notification-Service/issues"
+    "url": "https://github.com/imskr/typescript-node-microservice-starter/issues"
   },
-  "homepage": "https://github.com/bharatx-in/BharatX-Notification-Service#readme",
+  "homepage": "https://github.com/imskr/typescript-node-microservice-starter#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
